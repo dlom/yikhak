@@ -1,0 +1,29 @@
+{
+  "name": "yikhak",
+  "version": "0.0.1",
+  "description": "yikyak proxy + web ui",
+  "main": "server.js",
+  "dependencies": {
+    "request": "^2.42.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/dlom/yikhak.git"
+  },
+  "keywords": [
+    "yik",
+    "yak",
+    "yikyak"
+  ],
+  "author": "Mark Old",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dlom/yikhak/issues"
+  },
+  "homepage": "https://github.com/dlom/yikhak"
+}
