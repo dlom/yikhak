@@ -1,6 +1,7 @@
 var request = require("request");
 var express = require("express");
 var crypto = require("crypto");
+var STATUS_CODES = require("http").STATUS_CODES;
 var url = require("url");
 var querystring = require("querystring");
 
@@ -21,7 +22,7 @@ app.use("/api", function(req, res) {
     keys.forEach(function(key) {
         sorted[key] = parsedUrl.query[key];
     });
-    parsedUrl.query = sorted;
+    parsedUrl.query = sorted; // pray
     parsedUrl.query["hash"] = crypto.createHmac("sha1", key).update(url.format(parsedUrl) + salt).digest("base64")
     parsedUrl.query["salt"] = salt;
 
@@ -32,12 +33,18 @@ app.use("/api", function(req, res) {
         }
     }, function(err, response, body) {
         if (err) throw err;
-        if (body.trim() !== "") {
-            res.jsonp(JSON.parse(body));
+        if (response.statusCode === 200) {
+            if (body.trim() !== "") {
+                res.jsonp(JSON.parse(body));
+            } else {
+                res.status(400).jsonp({
+                    "error": "400: " + STATUS_CODES[400]
+                });
+            }
         } else {
-            res.status(400).jsonp({
-                "error": "400: Bad Request"
+            res.status(response.statusCode).jsonp({
+                "error": response.statusCode + ": " + STATUS_CODES[response.statusCode]
             });
         }
     });
-}).listen(8080);
+}).use(express.static(__dirname + '/public')).listen(8080);
