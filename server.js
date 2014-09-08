@@ -37,9 +37,7 @@ app.use("/api", function(req, res) {
             if (body.trim() !== "") {
                 res.jsonp(JSON.parse(body));
             } else {
-                res.status(400).jsonp({
-                    "error": "400: " + STATUS_CODES[400]
-                });
+                res.jsonp({});
             }
         } else {
             res.status(response.statusCode).jsonp({
