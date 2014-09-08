@@ -4,7 +4,8 @@
   "description": "yikyak proxy + web ui",
   "main": "server.js",
   "dependencies": {
-    "request": "^2.42.0"
+    "request": "^2.42.0",
+    "express": "^4.8.8"
   },
   "devDependencies": {},
   "scripts": {
